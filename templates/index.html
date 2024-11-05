@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge base Student Advisory System</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select, button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .advice-box {
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .hidden {
+            display: none;
+        }
+        .star-rating {
+            display: flex;
+            flex-direction: row;
+            font-size: 2rem;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            cursor: pointer;
+            color: #ccc;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating input:hover ~ label {
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>An Intelligent University Student Advisory System</h1>
+        <form id="advice-form">
+            <label for="regnum">Registration Number:</label>
+            <input type="text" id="regnum" name="regnum" placeholder="Enter your registration number" required>
+            
+            <label for="query-type">Select Type of Query:</label>
+            <select id="query-type" name="query-type" required>
+                <option value="">--Select--</option>
+                <option value="Course Duration">Course Duration</option>
+                <option value="Spill-over">Spill-over</option>
+                <option value="Transfer">Transfer</option>
+            </select>
+            
+            <label for="value">Enter Value:</label>
+            <input type="text" id="value" name="value" placeholder="Enter a number" required>
+
+           
+            <button type="submit">Generate Advice</button>
+        </form>
+
+        <div id="result" class="result"></div>
+
+        <div class="advice-box hidden">
+            <h2>Advice as at My Cut-Off 300Level:</h2>
+            <p id="advice-text"></p>
+            <button id="back-button">Go Back</button>
+
+            <!-- Rate Me Section -->
+            <form id="rating-form" action="/submit-rating" method="POST">
+                <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5" />
+                    <label for="star5">&#9733;</label>
+                    <input type="radio" id="star4" name="rating" value="4" />
+                    <label for="star4">&#9733;</label>
+                    <input type="radio" id="star3" name="rating" value="3" />
+                    <label for="star3">&#9733;</label>
+                    <input type="radio" id="star2" name="rating" value="2" />
+                    <label for="star2">&#9733;</label>
+                    <input type="radio" id="star1" name="rating" value="1" />
+                    <label for="star1">&#9733;</label>
+                </div>
+                <!-- Hidden input for regnum -->
+                <input type="hidden" id="rating-regnum" name="regnum" value="">
+                <button type="submit">Rate Me</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('advice-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const regnum = document.getElementById('regnum').value;
+            const queryType = document.getElementById('query-type').value;
+            const value = document.getElementById('value').value; 
+            const data = {
+                regnum: regnum,
+                query_type: queryType,
+                value: value
+            };
+
+            const response = await fetch('/get_advice', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById('advice-text').innerText = result.advice;
+
+            // Set regnum value in hidden input for rating form
+            document.getElementById('rating-regnum').value = regnum;
+            
+            document.querySelector('.advice-box').classList.remove('hidden');
+            document.getElementById('advice-form').classList.add('hidden');
+        });
+
+        document.getElementById('back-button').addEventListener('click', function() {
+            document.querySelector('.advice-box').classList.add('hidden');
+            document.getElementById('advice-form').classList.remove('hidden');
+        });
+
+        document.getElementById('query-type').addEventListener('change', function() {
+            const queryType = document.getElementById('query-type').value;
+            const valueInput = document.getElementById('value');
+            switch(queryType) {
+                case 'Course Duration':
+                    valueInput.placeholder = 'Enter course duration in years';
+                    break;
+                case 'Credit Load':
+                    valueInput.placeholder = 'Enter your Total Credit Unit';
+                    break;
+                case 'Spill-over':
+                    valueInput.placeholder = 'Enter spill-over credit units';
+                    break;
+                case 'Transfer':
+                    valueInput.placeholder = 'Enter your CGPA';
+                    break;
+                default:
+                    valueInput.placeholder = 'Enter a number';
+            }
+        });
+    </script>
+</body>
+</html>
