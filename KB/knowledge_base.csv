@@ -1,1 +1,22 @@
-
+Type, Range, Maximum_Extension, Total_Allowed_Years, Advice,
+Course Duration, 3 years, 2 years, 5 years," You have a maximum of 5 years to complete your 3-year course, if you exceed the normal duration. After this you will be advised to withdraw.",
+Course Duration, 4 years, 2 years, 6 years," You have a maximum of 6 years to complete your 4-year course, if you exceed the normal duration. After this  you will be advised to withdraw.",
+Course Duration, 5 years, 3 years, 8 years," You have a maximum of 8 years to complete your 5-year course, if you exceed the normal duration. After this  you will be advised to withdraw.",
+Course Duration, 6 years, 3 years, 9 years," You have a maximum of 9 years to complete your 6-year course, if you exceed the normal duration. After this  you will be advised to withdraw.",
+CGPA, 4.50-5.00," """"", , Excellent performance! You are on track for First Class (Hons). Keep up the hard work.,
+CGPA, 3.50-4.49," """"", , Great job! You are performing well. Maintain your momentum for a Second Class Upper (Hons).,
+CGPA, 2.50-3.49," """"", ," You are doing good,  but you can improve. Aim for better grades to secure a Second Class Lower (Hons).",
+CGPA, 1.50-2.49," """"", , You need to put in more effort. Aim to improve and avoid a lower class (3rd Class Hons).,
+CGPA, 1.00-1.49," """"", , You're passing  but just barely. Push yourself to avoid failing.,
+CGPA, 0.00-0.99," """"", ,"Your CGPA is below 1.00 at the end of this academic year, you'll be placed on probation for a year to retake failed courses. If your CGPA does not exceed 1.0, you'll be withdrawn for a year. Afterward, you would be left to reapply to a new program, but acceptance isn't guaranteed. If no department accepts you, final withdrawal follows.",
+CGPA, 4.00 and above, , ,, You qualify for 3 additional units this semester with the normal registration of 24units.
+CGPA, 3.00-4.00, , ,, You qualify for 2 additional units this semester with the normal registration of 24units.
+CGPA, 2.00-2.99, , ,, You qualify for 1 additional unit this semester with the normal registration of 24units.
+CGPA, Below 2.00," """"", , No additional units are allowed this semester.,
+Credit Load,25 and above," """"",,"Your credit unit is above normal registration, your CGPA will determine how many credit load can be added to 24",
+Credit Load,15 and a24," """"",,Your credit unit is within normal registration. Proceed with course registration,
+Credit Load,Below 15," """"",,"Your total credit unit for the semester is below normal registration, you need for some courses",
+Spill-over, Less than 6 credit units, , , You may register just the number of outstanding credit units  and the 15-unit minimum requirement will not apply.,
+Spill-over,6 and above credit units, , , You will have to register the number of outstanding credit units  and other borrowed courses to reach the 15-unit minimum requirement.,
+Transfer, Below 3.00," """""," """"", Any student with a CGPA below 3.00 shall not be allowed to transfer.,
+Transfer, 3.00 and above," """""," """"", Only 5% of the total number of students in a College/Department shall be allowed to transfer.,
